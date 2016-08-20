@@ -397,123 +397,123 @@ document.addEventListener('touchmove', function (e) { e.preventDefault(); }, fal
 document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 0); }, false);
 var start = 0;
 //上拉加载更多数据
-if ( lock == "true") {
-    pullUpAction();
-}else{
-    alert("佳伟你拉太快啦〜");
-}
+
 function pullUpAction () {
-    start += 15;
-    lock = flase;
-    $.ajax({
-         type: "GET",
-         url: "http://api.c-f.com/football/elearning/materials?start="+start+"&limit=15&key=visitor",
-         data: {},
-         dataType: "json",
-         success: function(data){
-            if(data.length!=0){
-                $.each(data, function(index, val) {
-                    var urlT = val.url.substring(val.url.length-3);
-                    var url =  "http://s.files.c-f.com/"+val.url;
-                    var urlAll = url.replace(/\s/g,'%20');
-                    console.log(urlAll);
-                    if (urlT=="mp3") {
-                        var content = "<span class='mp3'></span>"+
-                                        "<audio class='audio' controls='controls'>"+
-                                          "<source src="+urlAll+" type='audio/mpeg'>"+
-                                          "<source src="+urlAll+" type='audio/ogg'>"+
-                                        "</audio>";
-                        class_p = "mp3_p";
-                        
-                    }else{
-                        content = "<span class='pdf'>"+
-                                      "<a target='_blank' href="+urlAll+"></a>"+
-                                  "</span>";
-                        class_p = "pdf_p";
-                    }
-                    html="<li class='add'>"+"<p class="+class_p+">"+val.name+"</p>"+content+"</li>";
-                    $("#thelist").append(html);
-                    console.log(val.name);
-                    htmlH=$(".add").last().height();
-                    console.log(htmlH);
-                    $("#thelist").height($("#thelist").height()+htmlH);
-                    console.log($("#thelist").height());
-                    console.log(val.name);
-                    myScroll.refresh();
-                });
-                $(".mp3,.mp3_p").parent(".add").on('click', function() {
-                    //防止点击两次
-                    if (t1 == null){
-                        t1 = new Date().getTime();
-                    }else{       
-                        var t2 = new Date().getTime();
-                        if(t2 - t1 < 500){
-                            t1 = t2;
-                            return;
-                        }else{
-                            t1 = t2;
-                        }
-                    }
-                    /*before_c = $(this).height();
-                    $(this).children("audio").css("display", "block");
-                    after_c = $(this).height();
-                    //点击之后改ul的高度
-                    var moreH = after_c - before_c;
-                    var hh=$("#thelist").height()+moreH;
-                    $("#thelist").height(hh);
-                    // console.log("thelist:" + hh);
-                    myScroll.refresh();*/
-                    var video = document.getElementsByClassName('audio');
-                    console.log(time);
-                    $.each(video,function(index,val){
-                        //console.log(index);
-                        if($(this).attr("autoplay")=="autoplay"){
-                            //console.log(val);
-                            //console.log(time);
-                            $(this)[0].pause();
-                            $(this).attr("autoplay"," ");
-                            //console.log($(this)[0]);
-                            $(this).css("display","none");
-                        }
-                    })
-                    /*for (var i=0;i<video.length;i++){
-                        alert('33');
-                        console.log(this); 这个this指的是li..为什么
-                        if($(this).children("audio").attr("autoplay")=="autoplay"){
-                            alert('22');
-                            console.log(time);
+    if ( lock == "true") {
+        start += 15;
+        lock = flase;
+        $.ajax({
+             type: "GET",
+             url: "http://api.c-f.com/football/elearning/materials?start="+start+"&limit=15&key=visitor",
+             data: {},
+             dataType: "json",
+             success: function(data){
+                if(data.length!=0){
+                    $.each(data, function(index, val) {
+                        var urlT = val.url.substring(val.url.length-3);
+                        var url =  "http://s.files.c-f.com/"+val.url;
+                        var urlAll = url.replace(/\s/g,'%20');
+                        console.log(urlAll);
+                        if (urlT=="mp3") {
+                            var content = "<span class='mp3'></span>"+
+                                            "<audio class='audio' controls='controls'>"+
+                                              "<source src="+urlAll+" type='audio/mpeg'>"+
+                                              "<source src="+urlAll+" type='audio/ogg'>"+
+                                            "</audio>";
+                            class_p = "mp3_p";
                             
-                            $(this).children("audio")[0].pause();
-                            $(this).css("display","none");
-                        }
-                    }*/
-                    $(this).children("audio").css("display", "block");
-                    $(this).children("audio").attr("autoplay","autoplay");
-                    $(this).children("audio")[0].play();
-                });
-                $(".pdf").parent(".add").on('click',function() {
-                    if (t1 == null){
-                        t1 = new Date().getTime();
-                    }else{       
-                        var t2 = new Date().getTime();
-                        if(t2 - t1 < 500){
-                            t1 = t2;
-                            return;
                         }else{
-                            t1 = t2;
+                            content = "<span class='pdf'>"+
+                                          "<a target='_blank' href="+urlAll+"></a>"+
+                                      "</span>";
+                            class_p = "pdf_p";
                         }
-                    }
-                    var url = $(this).find("a").attr("href");
-                    console.log(url);
-                    window.open(url); 
-                    myScroll.refresh();
-                })
-            }else{
-                $(".pullUpLabel").html("已加载全部内容");
-            }
-            lock = true;
-         }
-    });
+                        html="<li class='add'>"+"<p class="+class_p+">"+val.name+"</p>"+content+"</li>";
+                        $("#thelist").append(html);
+                        console.log(val.name);
+                        htmlH=$(".add").last().height();
+                        console.log(htmlH);
+                        $("#thelist").height($("#thelist").height()+htmlH);
+                        console.log($("#thelist").height());
+                        console.log(val.name);
+                        myScroll.refresh();
+                    });
+                    $(".mp3,.mp3_p").parent(".add").on('click', function() {
+                        //防止点击两次
+                        if (t1 == null){
+                            t1 = new Date().getTime();
+                        }else{       
+                            var t2 = new Date().getTime();
+                            if(t2 - t1 < 500){
+                                t1 = t2;
+                                return;
+                            }else{
+                                t1 = t2;
+                            }
+                        }
+                        /*before_c = $(this).height();
+                        $(this).children("audio").css("display", "block");
+                        after_c = $(this).height();
+                        //点击之后改ul的高度
+                        var moreH = after_c - before_c;
+                        var hh=$("#thelist").height()+moreH;
+                        $("#thelist").height(hh);
+                        // console.log("thelist:" + hh);
+                        myScroll.refresh();*/
+                        var video = document.getElementsByClassName('audio');
+                        console.log(time);
+                        $.each(video,function(index,val){
+                            //console.log(index);
+                            if($(this).attr("autoplay")=="autoplay"){
+                                //console.log(val);
+                                //console.log(time);
+                                $(this)[0].pause();
+                                $(this).attr("autoplay"," ");
+                                //console.log($(this)[0]);
+                                $(this).css("display","none");
+                            }
+                        })
+                        /*for (var i=0;i<video.length;i++){
+                            alert('33');
+                            console.log(this); 这个this指的是li..为什么
+                            if($(this).children("audio").attr("autoplay")=="autoplay"){
+                                alert('22');
+                                console.log(time);
+                                
+                                $(this).children("audio")[0].pause();
+                                $(this).css("display","none");
+                            }
+                        }*/
+                        $(this).children("audio").css("display", "block");
+                        $(this).children("audio").attr("autoplay","autoplay");
+                        $(this).children("audio")[0].play();
+                    });
+                    $(".pdf").parent(".add").on('click',function() {
+                        if (t1 == null){
+                            t1 = new Date().getTime();
+                        }else{       
+                            var t2 = new Date().getTime();
+                            if(t2 - t1 < 500){
+                                t1 = t2;
+                                return;
+                            }else{
+                                t1 = t2;
+                            }
+                        }
+                        var url = $(this).find("a").attr("href");
+                        console.log(url);
+                        window.open(url); 
+                        myScroll.refresh();
+                    })
+                }else{
+                    $(".pullUpLabel").html("已加载全部内容");
+                }
+                lock = true;
+             }
+        });
+    }else{
+        alert("佳伟你拉太快啦〜");
+    }
     myScroll.refresh();
 }
 </script>
