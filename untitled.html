@@ -227,8 +227,9 @@
 <script type="text/javascript" src="http://s.files.c-f.com/h5/js/iscroll.js"></script>
 <script type="text/javascript">
 var t1 = null;//这个设置为全局
-var lock = false;
+var lock;
 $(function(){
+    lock = false;
     //首次加载数据
     $.ajax({
          type: "GET",
@@ -401,7 +402,7 @@ var start = 0;
 function pullUpAction () {
     if ( lock == "true") {
         start += 15;
-        lock = flase;
+        lock = false;
         $.ajax({
              type: "GET",
              url: "http://api.c-f.com/football/elearning/materials?start="+start+"&limit=15&key=visitor",
