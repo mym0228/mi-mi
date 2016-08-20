@@ -237,7 +237,6 @@ $(function(){
          data: {},
          dataType: "json",
          success: function(data){
-            lock = true;
             $.each(data, function(index, val) {
                 var urlT = val.url.substring(val.url.length-3);
                 var url =  "http://s.files.c-f.com/"+val.url;
@@ -387,7 +386,9 @@ $(function(){
                     });
                 }, 1);
             } 
-            
+         complete: function(){
+                lock = true;
+             }   
         }
     });
 })
@@ -510,11 +511,13 @@ function pullUpAction () {
                 }else{
                     $(".pullUpLabel").html("已加载全部内容");
                 }
+             }
+             complete: function(){
                 lock = true;
              }
         });
     }else{
-        alert("佳伟你拉太快啦.......");
+        alert("佳伟你拉太快.......");
     }
     myScroll.refresh();
 }
