@@ -234,7 +234,7 @@ $(function(){
     lock = false;
     $.ajax({
         type: "GET",
-        url: "http://api.c-f.com/football/elearning/materials?start="+0+"&limit=15&key=visitor",
+        url: "http://api.c-f.com/football/elearning/materials?start="+0+"&limit=5&key=visitor",
         data: {},
         dataType: "json",
         success: function(data){
@@ -409,11 +409,11 @@ var start = 0;
 function pullUpAction () {
     console.log(lock);
     if ( lock == true) {
-        start += 15;
+        start += 5;
         lock = false;
         $.ajax({
              type: "GET",
-             url: "http://api.c-f.com/football/elearning/materials?start="+start+"&limit=15&key=visitor",
+             url: "http://api.c-f.com/football/elearning/materials?start="+start+"&limit=5&key=visitor",
              data: {},
              dataType: "json",
         success:(function(data) {
