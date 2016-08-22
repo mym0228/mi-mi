@@ -275,7 +275,7 @@ $(function(){
         },
         complete: function(xhr, type){
             //console.log("complete");
-            lock = true;
+            lock = false;
             //console.log(lock);
         }
     });
@@ -392,6 +392,7 @@ function pullUpAction () {
         //$(".pullUpLabel").innerHTML(" ");
         $(".pullUpLabel").html("操作过于频繁，请稍候再试");
         //pullUpEl.className='loading';
+        lock = true;
     }
     //myScroll.refresh();
 }
