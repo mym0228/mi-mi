@@ -133,7 +133,7 @@
 <script type="text/javascript">
 var t1 = null;//这个设置为全局
 var startId;
-var limit = 5;
+var limit = 15;
 var lock;
 $(function(){
     //首次加载数据
@@ -275,7 +275,7 @@ $(function(){
         },
         complete: function(xhr, type){
             //console.log("complete");
-            lock = true;
+            lock = false;
             //console.log(lock);
         }
     });
