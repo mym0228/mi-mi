@@ -133,7 +133,7 @@
 <script type="text/javascript">
 var t1 = null;//这个设置为全局
 var startId;
-var limit = 5;
+var limit = 15;
 var lock;
 $(function(){
     //首次加载数据
@@ -150,7 +150,7 @@ $(function(){
                 var urlT = val.url.substring(val.url.lastIndexOf(".") + 1);
                 var url =  "http://s.files.c-f.com/"+val.url;
                 var urlAll = url.replace(/\s/g,'%20');
-                console.log(urlAll);
+                //console.log(urlAll);
                 if (urlT=="mp3") {
                     var content = "<span class='mp3'></span>"+
                                     "<audio class='audio' controls='controls' src="+urlAll+">"+
@@ -164,10 +164,10 @@ $(function(){
                 }
                 html="<li class='add'>"+"<p class="+class_p+">"+val.name+"</p>"+content+"</li>";
                 $("#thelist").append(html);
-                console.log(val.name);
+                //console.log(val.name);
             });
             time = 0;
-            console.log(time);
+            //console.log(time);
             $(".mp3,.mp3_p").parent(".add").on('click', function() {
                 //防止点击两次
                 if (t1 == null){
@@ -194,7 +194,7 @@ $(function(){
                     myScroll.refresh();
                     //console.log(time);
                 }else{
-                    console.log(time);
+                    //console.log(time);
                     $.each(video,function(index,val){
                         //console.log(index);
                         if($(this).attr("autoplay")=="autoplay"){
@@ -230,7 +230,7 @@ $(function(){
             resultContentH = $("#thelist").height(); 
             if (resultContentH > 0) { 
                 //判断数据加载完成的条件 
-                console.log("此时showResult的高度是:" + resultContentH); 
+                //console.log("此时showResult的高度是:" + resultContentH); 
                 $("#thelist").height(resultContentH); 
                 setTimeout(function () {
                     //clearInterval(intervalTime); 
@@ -274,9 +274,9 @@ $(function(){
             $(".pullUpLabel").html("加载失败，请稍后再试");
         },
         complete: function(xhr, type){
-            console.log("complete");
+            //console.log("complete");
             lock = true;
-            console.log(lock);
+            //console.log(lock);
         }
     });
 })
@@ -301,7 +301,7 @@ function pullUpAction () {
                     var urlT = val.url.substring(val.url.lastIndexOf(".")+1);
                     var url =  "http://s.files.c-f.com/"+val.url;
                     var urlAll = url.replace(/\s/g,'%20');
-                    console.log(urlAll);
+                    //console.log(urlAll);
                     if (urlT=="mp3") {
                         var content = "<span class='mp3'></span>"+
                                         "<audio class='audio' controls='controls'>"+
@@ -317,12 +317,12 @@ function pullUpAction () {
                     }
                     html="<li class='add'>"+"<p class="+class_p+">"+val.name+"</p>"+content+"</li>";
                     $("#thelist").append(html);
-                    console.log(val.name);
+                    //console.log(val.name);
                     htmlH=$(".add").last().height();
-                    console.log(htmlH);
+                    //console.log(htmlH);
                     $("#thelist").height($("#thelist").height()+htmlH);
-                    console.log($("#thelist").height());
-                    console.log(val.name);
+                    //console.log($("#thelist").height());
+                    //console.log(val.name);
                     myScroll.refresh();
                 });
                 $(".mp3,.mp3_p").parent(".add").on('click', function() {
@@ -339,7 +339,7 @@ function pullUpAction () {
                     }
                 }
                 var video = document.getElementsByClassName('audio');
-                    console.log(time);
+                    //console.log(time);
                     $.each(video,function(index,val){
                         //console.log(index);
                         if($(this).attr("autoplay")=="autoplay"){
@@ -369,7 +369,7 @@ function pullUpAction () {
                         }
                     }
                     var url = $(this).find("a").attr("href");
-                    console.log(url);
+                    //console.log(url);
                     window.open(url); 
                     myScroll.refresh();
                 })
@@ -381,13 +381,14 @@ function pullUpAction () {
             $(".pullUpLabel").html("加载失败，请稍后再试");
         },
         complete: function(xhr, type){
-            console.log("complete");
+            //console.log("complete");
             lock = true;
-            console.log(lock);
+            //console.log(lock);
         }
     });
     }else{
         $(".pullUpLabel").html("操作过于频繁，请稍候再试");
+        pullUpEl.className='loading';
     }
     myScroll.refresh();
 }
