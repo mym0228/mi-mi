@@ -243,14 +243,9 @@ $(function(){
                         useTransition: true,
                         //topOffset: pullDownOffset,
                         onRefresh: function () {
-                            if (lock == true) {
-                                if (pullUpEl.className.match('loading')) {
-                                    pullUpEl.className = '';
-                                    pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多';
-                                }
-                            } else {
-                                
-                                pullUpEl.querySelector('.pullUpLabel').innerHTML = '操作过于频繁，请稍候再试';
+                            if (pullUpEl.className.match('loading')) {
+                                pullUpEl.className = '';
+                                pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多';
                             }
                         },
                         onScrollMove: function () {
