@@ -133,7 +133,7 @@
 <script type="text/javascript">
 var t1 = null;//这个设置为全局
 var startId;
-var limit = 15;
+var limit = 5;
 var lock;
 $(function(){
     //首次加载数据
@@ -286,6 +286,7 @@ document.addEventListener('touchmove', function (e) { e.preventDefault(); }, fal
 document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 0); }, false);
 //上拉加载更多数据
 function pullUpAction () {
+    console.log(lock);
     if ( lock == true) {
         lock = false;
         $.ajax({
@@ -387,10 +388,12 @@ function pullUpAction () {
         }
     });
     }else{
+        console.log('345');
+        //$(".pullUpLabel").innerHTML(" ");
         $(".pullUpLabel").html("操作过于频繁，请稍候再试");
-        pullUpEl.className='loading';
+        //pullUpEl.className='loading';
     }
-    myScroll.refresh();
+    //myScroll.refresh();
 }
 </script>
 </body>
