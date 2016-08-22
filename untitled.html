@@ -292,7 +292,6 @@ document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 0
 //上拉加载更多数据
 function pullUpAction () {
     if ( lock == true) {
-        alert('33');
         lock = false;
         $.ajax({
          type: "GET",
@@ -393,7 +392,6 @@ function pullUpAction () {
         }
     });
     }else{
-        alert('cuole');
         $(".pullUpLabel").html("操作过于频繁，请稍候再试");
     }
     myScroll.refresh();
