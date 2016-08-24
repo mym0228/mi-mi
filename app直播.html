@@ -10,11 +10,16 @@
 	    img{border:0;}
         a{text-decoration:none;text-underline:none;}
         *{font-family:"微软雅黑",Arial;}
-        ul, li{padding:0;margin:0;list-style:none;}
+        ul,li{padding:0;margin:0;list-style:none;}
         body{padding:0;margin:0;}
         p{
         	-webkit-margin-before: 0em;
             -webkit-margin-after: 0em;
+        }
+        ul{
+        	-webkit-margin-before: 0em;
+            -webkit-margin-after: 0em;
+            -webkit-padding-start: 0;
         }
 		.banner{
 			width: 7.5rem;
@@ -45,55 +50,60 @@
 		}
         /*tab列表*/
         .tab{
-        	height: 0.4rem;
+        	height: 0.7rem;
         }
 		.tab li{
 			width: 33%;
-			height: 0.4rem;
-			line-height: 0.4rem;
+			height: 0.7rem;
+			line-height: 0.7rem;
 			float: left;
-			font-size: 20px;
+			font-size: 18px;
 			text-align: center;
 		}
+		.active{
+			border-bottom: 2px solid red;
+		}
 
-        /*队员tab*/
+    /*    队员tab    */
         .vs_p{
-        	height: 0.5rem;
-        	line-height: 0.5rem;
-        	font-size: 22px;
+        	height: 0.6rem;
+        	line-height: 0.6rem;
+        	font-size: 20px;
         	color: #9a9a9a;
         	text-align: center;
         	background-color: #f1f1f1;
+        	margin-top: 2px;
         }
         .vs_div{
         	padding: 0.2rem 0;
         }
         .tab_duiyuan .item{
-        	height: 0.4rem;
+        	height: 0.5rem;
         	padding: 0.12rem 0.6rem;
-        	font-size: 20px;
+        	font-size: 18px;
         	color: #696969;
         }
-    .zhenrong{
-    	font-size: 12px;
-    }
+    
         /*阵容-p*/
 	    .align_bar{
 	    	text-align:center;
-	    	height: 0.5rem;
-	    	line-height:0.5rem;
+	    	height: 0.6rem;
+	    	line-height:0.6rem;
 	    	color:#9a9a9a;
 	    	background-color: #f1f1f1;
+	    	font-size: 20px;
 	    }
     
         .team_box{
-        	width:3.71rem;
+        	width:3.75rem;
         	display: inline-block;
+        	font-size: 18px;
+        	float: left;
         }
         .team_box li{
         	overflow:hidden;
-        	height:0.4rem;
-        	line-height:0.4rem;
+        	height:0.5rem;
+        	line-height:0.5rem;
         	border-bottom:1px #d9d9d9 solid;
         }
         .team_box li div{
@@ -109,8 +119,8 @@
         .name_b{width:69%;text-align:left;text-indent:0.2rem;}
         .name_b span{display:block;float:left;text-indent:0;}
         .name_b .spantext{padding:0.1rem;font-size:14px;line-height:160%;overflow:hidden;text-align:center;}
-        .name_b .spanimg{width:0.4rem;height:0.4rem;padding:0;margin-left:0.2rem;}
-        .name_b .spanimg img{width:0.4rem;height:0.4rem;}
+        .name_b .spanimg{width:0.5rem;height:0.5rem;padding:0;margin-left:0.2rem;}
+        .name_b .spanimg img{width:0.5rem;height:0.5rem;}
         .team_box .space_bar{height:0.25rem;line-height:0.25rem;text-align:center;background-color:#f2f2f2;font-size:13px;color:#999999;}
         .info_box .team_box{width:calc(100% - 20px);margin-left:0.25rem;}
         .info_box .team_box li .name_a{width:25%;text-align:right;border-right:1px #d9d9d9 solid;border-left:0;padding-right:0.2rem;}
@@ -124,9 +134,9 @@
 		<img class="flag_r" src="http://hdtravelpictures.com/wp-content/uploads/2011/03/1149.jpg" />
 	</div>
 	<ul class="tab">
-		<li>文字直播</li>
-		<li>数据</li>
-		<li>队员名单</li>
+		<li id="tab_wenzi">文字直播</li>
+		<li id="tab_shuju">数据</li>
+		<li id="tab_duiyuan">队员名单</li>
 	</ul>
 	<div class="tab_wenzi">
 		<ul>
@@ -134,12 +144,13 @@
 			<li></li>
 		</ul>
 	</div>
-	<div class="tab_shuju">
 
+	<div class="tab_shuju">
+        <ul></ul>
 	</div>
 
 	<div class="tab_duiyuan">
-	    <p class="vs_p">A队(主队)韩国 vs B队(客队)中国</p>
+	    <p class="vs_p">A队(主队)<span id="hostTeam_name_span"></span> vs B队(客队)<span id="awayTeam_name_span"></span></p>
 		<div class="vs_div">
 			<p class="item">裁判员：<span id="caipanyuan">韦伯</span></p>
 			<p class="item">第一助理：<span id="diyi">xxxx</span></p>
@@ -204,7 +215,7 @@
 		            <div class="name_b">XXX(守门员)</div>
 		        </li>
 		        <li class="space_bar">替补</li>
-		        <li class="list_1">
+		        <!-- <li class="list_1">
 		            <div class="name_a">6</div>
 		            <div class="name_b">XXX</div>
 		        </li>
@@ -215,7 +226,7 @@
 		        <li class="list_1">
 		            <div class="name_a">6</div>
 		            <div class="name_b">XXX</div>
-		        </li>
+		        </li> -->
 		    </ul>
 		    <ul class="team_box">
 		        <li class="list_1">
@@ -271,7 +282,7 @@
 		            <div class="name_b">XXX(守门员)</div>
 		        </li>
 		        <li class="space_bar">替补</li>
-		        <li class="list_1">
+		        <!-- <li class="list_1">
 		            <div class="name_a">6</div>
 		            <div class="name_b">XXX</div>
 		        </li>
@@ -282,7 +293,7 @@
 		        <li class="list_1">
 		            <div class="name_a">6</div>
 		            <div class="name_b">XXX</div>
-		        </li>
+		        </li> -->
 		    </ul>
 		</div>
 	</div>
@@ -302,8 +313,13 @@
             win.addEventListener(resizeEvt, recalc, false);
             doc.addEventListener('DOMContentLoaded', recalc, false);
         })(document, window);
+
         $(function(){
         	getShipin();  //banner
+        	showItem("tab_wenzi");   //点击切换tab
+        	showItem("tab_duiyuan");
+        	showItem("tab_shuju");
+
         	getDuiyuan();  //队员名单
         })
         function getShipin(){
@@ -323,6 +339,61 @@
         		console.log("complete");
         	});
         }
+        function showItem(a){
+        	$("#"+a).on('click',function() {
+        		$(this).addClass('active').siblings().removeClass('active');
+        		$(".tab_wenzi,.tab_shuju,.tab_duiyuan").hide();
+        		$("."+a).show();
+        	});
+        }
+        var datahhh={
+        	"substitutionPlayers" : [ 
+        	{
+		      "birthday" : "2000-01-23T04:56:07.000+00:00",
+		      "country" : "aeiou",
+		      "birthplace" : "aeiou",
+		      "record" : {
+		        "substitution" : 123,
+		        "gamesplayed" : 123,
+		        "dismissals" : 123,
+		        "starts" : 123,
+		        "bookings" : 123,
+		        "playerId" : 123456789,
+		        "goals" : 123
+		      },
+		      "name" : "aeiou",
+		      "weight" : "aeiou",
+		      "id" : 123456789,
+		      "avatar" : "aeiou",
+		      "position" : "aeiou",
+		      "jeserysNum" : 123,
+		      "first" : 123,
+		      "height" : "aeiou"
+		    },
+		    {
+		      "birthday" : "2000-01-23T04:56:07.000+00:00",
+		      "country" : "aeiou",
+		      "birthplace" : "aeiou",
+		      "record" : {
+		        "substitution" : 123,
+		        "gamesplayed" : 123,
+		        "dismissals" : 123,
+		        "starts" : 123,
+		        "bookings" : 123,
+		        "playerId" : 123456789,
+		        "goals" : 123
+		      },
+		      "name" : "hhh",
+		      "weight" : "aeiou",
+		      "id" : 123456789,
+		      "avatar" : "aeiou",
+		      "position" : "aeiou",
+		      "jeserysNum" : 456,
+		      "first" : 123,
+		      "height" : "aeiou"
+		    }
+		    ],
+        }
         function getDuiyuan(){
         	$.ajax({
         		url: "http://api.c-f.com/football/games/competitions/5/matches/1?key=visitor",
@@ -338,6 +409,8 @@
 		        		return "未产生";
 		        	}
 		        }
+		        $("#hostTeam_name_span").text(ifNnll(data.hostTeam.teamInfo.name));
+		        $("#awayTeam_name_span").text(ifNnll(data.awayTeam.teamInfo.name));
         		$("#caipanyuan").text(ifNnll(data.chiefReferee.name));
         		$("#diyi").text(ifNnll(data.sideReferees[0].name));
         		$("#dier").text(ifNnll(data.sideReferees[1].name));
@@ -356,11 +429,22 @@
 
         		//客队
         		$("#awayTeam_name").text(ifNnll(data.awayTeam.teamInfo.name));
-        		$("#awayTeam_teamLeader").text(ifNnll(data.awayTeam.teamLeader));
+        		$("#awayTeam_teamLeader").text(ifNnll(data.awayTeam.teamLeader.name));
         		$("#awayTeam_chiefCoach").text(ifNnll(data.awayTeam.chiefCoach.name));
         		$("#awayTeam_jacket").css('background-color', data.awayTeam.jersey.jacket);
         		$("#awayTeam_shorts").css('background-color', data.awayTeam.jersey.shorts);
         		$("#awayTeam_socks").css('background-color', data.awayTeam.jersey.socks);
+
+        		// 替补
+        		$.each(datahhh.substitutionPlayers, function(index, val) {
+        			console.log(index);
+        			console.log(val.name);
+        			var li="<li class=''>"+
+					            "<div class='name_a'>"+val.jeserysNum+"</div>"+
+					            "<div class='name_b'>"+val.name+"</div>"+
+					        "</li>"
+					$(".space_bar").after(li);
+        		});
         	})
         	.fail(function() {
         		console.log("error");
