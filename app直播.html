@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>移动端rem</title>
+	<meta charset="UTF-8" />
+	<title>competitionMatch</title>
 	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-    <script src="zepto.min.js"></script>
+    <script src="http://s.files.c-f.com/football/js/common/zepto.min.js"></script>
+    <!-- <script src="http://libs.baidu.com/highcharts/2.2.5/highcharts.js"></script> -->
 	<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script> -->
+	<script type="text/javascript">
+		(function(doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function() {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+                };
+        
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+	</script>
 	<style type="text/css">
 	    img{border:0;}
         a{text-decoration:none;text-underline:none;}
@@ -23,10 +39,21 @@
         }
 		.banner{
 			width: 7.5rem;
-			height: 2.7rem;
+			height: 3.75rem;
 			font-size: 24px;
-			color: black;
+			color: white;
 			font-size:0;
+		}
+		.banner>div{
+			display: inline-block;
+		}
+		.banner>img{
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 7.5rem;
+			height: 3.75rem;
+			z-index: -1;
 		}
 		.flag_l,.flag_r{
 			width: 1.4rem;
@@ -34,7 +61,17 @@
 			margin-top: 0.4rem;
 			margin-bottom: 0.1rem;
 		}
-		 .flag_l{
+		.flag_l+p,.flag_r+p{
+			width: 1.4rem;
+			height: 0.4rem;
+			font-size: 18px;
+			color: block;
+			text-align: center;
+		}
+		.flag_l+p{
+			margin-left: 1.7rem;
+		}
+		.flag_l{
 			margin-left: 1.7rem;
 		}
 		.flag_r{
@@ -48,6 +85,31 @@
 			overflow: hidden;
 			text-align: center;
 		}
+		.banner_shipin{
+			display: inline-block;
+			margin: 0 0 0.2rem 3rem;
+			width: 1.5rem;
+			height: 0.4rem;
+			border: 1px solid white;
+		}
+		.banner_shipin p{
+			font-size: 14px;
+			height: 0.4rem;
+			line-height: 0.4rem;
+			text-align: center;
+		}
+		#didian,#shijian{
+			width: 7.5rem;
+			height: 0.4rem;
+			color: block;
+			text-align: center;
+		}
+		#didian{
+			font-size: 14px;
+		}
+		#shijian{
+			font-size: 18px;
+		}
         /*tab列表*/
         .tab{
         	height: 0.7rem;
@@ -59,10 +121,112 @@
 			float: left;
 			font-size: 18px;
 			text-align: center;
+			border-bottom: 2px solid #dcdcdc;
 		}
-		.active{
+		.tab li.active{
 			border-bottom: 2px solid red;
 		}
+		.tab_wenzi{
+			display: block;
+		}
+		.tab_shuju,.tab_duiyuan{
+			display: none;
+		}
+
+	/*    直播tab    */
+	    .room{
+	    	margin: 0.17rem 0 0 0.1rem;
+		    padding-top: 0.15rem;
+		    border-left: 2px solid #dcdcdc;
+		    color: #8C8C8C;
+		    font-size: 18px;
+	    }
+	    .room>li {
+		    padding: 0.15rem 0.1rem;
+		}
+		.room>li .time {
+		    margin-bottom: 0.05rem;
+		    position: relative;
+		}
+		.room>li>p {
+		    line-height: 0.4rem;
+		}
+		.room>li .time:after {
+		    position: absolute;
+		    left: -0.16rem;
+		    top: 0.16rem;
+		    content: '';
+		    display: inline-block;
+		    width: 0.1rem;
+		    height: 0.1rem;
+		    background: #3669e8;
+		    border-radius: 50%;
+		}
+    /*    数据tab    */
+        .tab_shuju{
+        	font-size: 14px;
+        	text-align: center;
+        	background-color: lightgray;
+        }
+        .tab_shuju table th{
+        	font-size: 18px;
+        	height: 0.5rem;
+	        line-height: 0.5rem;
+        }
+        .saikuang,.sta,.fenbutu{
+        	width: 7.5rem;
+        	height: auto;
+        	z-index: 9;
+        	background-color: white;
+        }
+.away .icon { text-align: left }
+.host .icon { text-align: right }
+.host .icon:after, .away .icon:before { content: ''; display: inline-block; width: 20px; height: 30px; margin: 0 5px; vertical-align: middle; background: url("http://www.caibisai.com/images/ball.png") no-repeat }
+.icon1:before, .icon1:after { background-position: -22px 0 !important }
+.icon2:before, .icon2:after { background-position: -1px 0 !important }
+.icon3:before, .icon3:after { background-position: -64px 0 !important }
+.icon4:before, .icon4:after { background-position: -43px 0 !important }
+.icon5:before, .icon5:after { background-position: -69px -31px !important }
+.icon6:before, .icon6:after, .icon7:before, .icon7:after { background-position: -44px -31px !important }
+.icon8:before, .icon8:after { background-position: -24px -31px !important }
+.icon9:before, .icon9:after { background-position: 0 -31px !important }
+
+.sta{
+	margin: 0.3rem 0;
+}
+.sta td{padding: 10px 0;}
+.sta .line { overflow: hidden; width: 90%; margin: 0 auto }
+.sta .left, .sta .right { float: left; width: 49%; height: 4px; margin: 5px 0 0px 1% }
+.sta .left { text-align: right }
+.sta .right { text-align: left }
+.sta tr .left span { display: block; float: right; height: 4px }
+.sta tr .right span { display: block; float: left; height: 4px }
+.sta tr:nth-child(even) .left span, .sta tr:nth-child(odd) .right span { background: #E68823 }
+.sta tr:nth-child(odd) .left span, .sta tr:nth-child(even) .right span { background: #CBCBCB }
+
+.fenbutu{
+	text-align: center;
+	background-color: lightgreen;
+	height: 4rem;
+}
+.fenbutu pos{
+	background: url("http://www.caibisai.com/images/ball.png") no-repeat;
+	background-position: -22px 0 !important;
+}
+.fenbutu .li_1,.fenbutu .li_4,.fenbutu .li_2{
+	width: 7.5rem;
+	height: ;
+}
+.fenbutu .li_4_li{
+	width: 1.875rem;
+	height: 1rem;
+	float: left;
+}
+.fenbutu .li_2_li{
+	width: 3.75rem;
+	height: 1rem;
+	float: left;
+}
 
     /*    队员tab    */
         .vs_p{
@@ -79,9 +243,27 @@
         }
         .tab_duiyuan .item{
         	height: 0.5rem;
-        	padding: 0.12rem 0.6rem;
+        	width: 7rem;
+        	line-height: 0.5rem;
+        	margin-left: 0.25rem;
         	font-size: 18px;
         	color: #696969;
+        	border-bottom: 1px #d9d9d9 solid;
+        }
+        .item_i{
+        	display: inline-block;
+        	width: 2rem;
+        	height: 0.5rem; 
+        	text-align: right;
+        	border-right: 1px solid #d9d9d9;
+        	padding-right: 0.2rem;
+        }
+        .item_i+span{
+        	display: inline-block;
+        	padding-left: 0.2rem;
+        }
+        .zhenrong{
+        	color: #969696;
         }
     
         /*阵容-p*/
@@ -115,13 +297,17 @@
         .list_2{
         	background-color:#f2f2f2;
         }
-        .name_a{width:30%;text-align:right;border-left:1px #d9d9d9 solid;}
+        .name_a{width:30%;height:0.5rem;text-align:right;border-left:1px #d9d9d9 solid;}
         .name_b{width:69%;text-align:left;text-indent:0.2rem;}
         .name_b span{display:block;float:left;text-indent:0;}
         .name_b .spantext{padding:0.1rem;font-size:14px;line-height:160%;overflow:hidden;text-align:center;}
         .name_b .spanimg{width:0.5rem;height:0.5rem;padding:0;margin-left:0.2rem;}
         .name_b .spanimg img{width:0.5rem;height:0.5rem;}
-        .team_box .space_bar{height:0.25rem;line-height:0.25rem;text-align:center;background-color:#f2f2f2;font-size:13px;color:#999999;}
+        .name_c{
+        	text-align: center;
+        	width: 100%;
+        }
+        .team_box .space_bar{height:0.5rem;line-height:0.5rem;text-align:center;background-color:#f2f2f2;font-size:18px;color:#999999;}
         .info_box .team_box{width:calc(100% - 20px);margin-left:0.25rem;}
         .info_box .team_box li .name_a{width:25%;text-align:right;border-right:1px #d9d9d9 solid;border-left:0;padding-right:0.2rem;}
         .info_box .team_box li .name_b{width:69%;text-align:left;text-indent:0.2rem;}
@@ -129,35 +315,133 @@
 </head>
 <body>
 	<div class="banner">
-	    <img class="flag_l" src="http://hdtravelpictures.com/wp-content/uploads/2011/03/1149.jpg" />
+	    <div>
+	    	<img class="flag_l" src="" />
+	    	<p></p>
+	    </div>
 		<span class="vs">vs</span>
-		<img class="flag_r" src="http://hdtravelpictures.com/wp-content/uploads/2011/03/1149.jpg" />
+		<div>
+		    <img class="flag_r" src="" /> 
+			<p></p>
+		</div>
+		<div class="banner_shipin"><p>观看视频</p></div>
+		<p id="didian"></p>
+		<p id="shijian"></p>
+		<img src="">
 	</div>
 	<ul class="tab">
-		<li id="tab_wenzi">文字直播</li>
+		<li id="tab_wenzi" class="active">文字直播</li>
 		<li id="tab_shuju">数据</li>
 		<li id="tab_duiyuan">队员名单</li>
 	</ul>
 	<div class="tab_wenzi">
-		<ul>
-			<li></li>
-			<li></li>
+		<ul class="room">
+		    
 		</ul>
 	</div>
 
 	<div class="tab_shuju">
-        <ul></ul>
+	    <div>
+	    	<table cellspacing="0" class="saikuang">
+	    	    <tbody>
+	    	        <tr><th colspan="5">赛况</th></tr>
+	    	        <!-- <tr class="away">
+	    	            <td width="45%" colspan="2"></td>
+	    	            <td width="10%">26'</td>
+	    	            <td width="15%" class="icon icon1"></td>
+	    	            <td width="30%" class="name" style="font-size: 8px;">约瑟夫·马丁内斯</td>
+	    	        </tr>
+	    	        <tr class="host">
+	    	            <td width="30%" class="name" style="font-size: 8px;">帕雷塔, 加布里埃尔</td>
+	    	            <td width="15%" class="icon icon2"></td>
+	    	            <td width="10%">45'</td>
+	    	            <td width="45%" colspan="2"></td>
+	    	        </tr>
+	    	        <tr class="away">
+	    	            <td width="45%" colspan="2"></td>
+	    	            <td width="10%">26'</td>
+	    	            <td width="15%" class="icon icon3"></td>
+	    	            <td width="30%" class="name" style="font-size: 8px;">约瑟夫·马丁内斯</td>
+	    	        </tr>
+	    	        <tr class="host">
+	    	            <td width="30%" class="name" style="font-size: 8px;">帕雷塔, 加布里埃尔</td>
+	    	            <td width="15%" class="icon icon4"></td>
+	    	            <td width="10%">45'</td>
+	    	            <td width="45%" colspan="2"></td>
+	    	        </tr>
+	    	        <tr class="away">
+	    	            <td width="45%" colspan="2"></td>
+	    	            <td width="10%">26'</td>
+	    	            <td width="15%" class="icon icon5"></td>
+	    	            <td width="30%" class="name" style="font-size: 8px;">约瑟夫·马丁内斯</td>
+	    	        </tr>
+	    	        <tr class="host">
+	    	            <td width="30%" class="name" style="font-size: 8px;">帕雷塔, 加布里埃尔</td>
+	    	            <td width="15%" class="icon icon6"></td>
+	    	            <td width="10%">45'</td>
+	    	            <td width="45%" colspan="2"></td>
+	    	        </tr><tr class="away">
+	    	            <td width="45%" colspan="2"></td>
+	    	            <td width="10%">26'</td>
+	    	            <td width="15%" class="icon icon7"></td>
+	    	            <td width="30%" class="name" style="font-size: 8px;">约瑟夫·马丁内斯</td>
+	    	        </tr>
+	    	        <tr class="host">
+	    	            <td width="30%" class="name" style="font-size: 8px;">帕雷塔, 加布里埃尔</td>
+	    	            <td width="15%" class="icon icon8"></td>
+	    	            <td width="10%">45'</td>
+	    	            <td width="45%" colspan="2"></td>
+	    	        </tr> -->
+	    	    </tbody>
+	    	</table>
+
+	    	<table cellspacing="0" class="sta">
+	    	    <tbody>
+	    	        <tr><th colspan="3">技术统计</th></tr>
+	    	        <!-- <tr class="tr">
+	    	            <td width="10%"><span>54%</span></td>
+	    	            <td width="80%"><p>控球率</p><div class="line"><div class="left"><span style="width: 54%;"></span></div><div class="right"><span style="width: 46%;"></span></div></div></td>
+	    	            <td width="10%"><span>46%</span></td>
+	    	        </tr>
+	    	        <tr class="tr">
+	    	            <td width="10%"><span>7</span></td>
+	    	            <td width="80%"><p>射正</p><div class="line"><div class="left"><span style="width: 58.3333%;"></span></div><div class="right"><span style="width: 41.6667%;"></span></div></div></td>
+	    	            <td width="10%"><span>5</span></td>
+	    	        </tr> -->
+	    	        
+	    	    </tbody>
+	    	</table>
+	    </div>
+	    <div class="fenbutu">
+	    	<ul class="li_1">
+	    		<li class="li_1_li"><p class="pos">33</p><p class="name">msalji</p></li>
+	    	</ul>
+	    	<ul class="li_4">
+	    		<li class="li_4_li"><p class="pos">33</p><p class="name">iasuhfoi</p></li>
+	    		<li class="li_4_li"><p class="pos">33</p><p class="name">dno</p></li>
+	    		<li class="li_4_li"><p class="pos">33</p><p class="name">akofpi</p></li>
+	    		<li class="li_4_li"><p class="pos">33</p><p class="name">duigh</p></li>
+	    		<li class="li_4_li"><p class="pos">33</p><p class="name">iasuhfoi</p></li>
+	    		<li class="li_4_li"><p class="pos">33</p><p class="name">dno</p></li>
+	    		<li class="li_4_li"><p class="pos">33</p><p class="name">akofpi</p></li>
+	    		<li class="li_4_li"><p class="pos">33</p><p class="name">duigh</p></li>
+	    	</ul>
+	    	<ul class="li_2">
+	    		<li class="li_2_li"><p class="pos">33</p><p class="name">nziog</p></li>
+	    		<li class="li_2_li"><p class="pos">33</p><p class="name">wiyriyt8</p></li>
+	    	</ul>
+	    </div>
 	</div>
 
 	<div class="tab_duiyuan">
-	    <p class="vs_p">A队(主队)<span id="hostTeam_name_span"></span> vs B队(客队)<span id="awayTeam_name_span"></span></p>
+	    <p class="vs_p"><span id="hostTeam_name_span"></span>(主队) vs <span id="awayTeam_name_span"></span>(客队)</p>
 		<div class="vs_div">
-			<p class="item">裁判员：<span id="caipanyuan">韦伯</span></p>
-			<p class="item">第一助理：<span id="diyi">xxxx</span></p>
-			<p class="item">第二助理：<span id="dier">xxxx</span></p>
-			<p class="item">第四官员：<span id="disi">xxxx</span></p>
-			<p class="item">裁判监督：<span id="caipan">xxxx</span></p>
-			<p class="item">比赛监督：<span id="bisai">xxxx</span></p>
+			<p class="item"><span class="item_i">裁判员</span><span id="caipanyuan">韦伯</span></p>
+			<p class="item"><span class="item_i">第一助理</span><span id="diyi">xxxx</span></p>
+			<p class="item"><span class="item_i">第二助理</span><span id="dier">xxxx</span></p>
+			<p class="item"><span class="item_i">第四官员</span><span id="disi">xxxx</span></p>
+			<p class="item"><span class="item_i">裁判监督</span><span id="caipan">xxxx</span></p>
+			<p class="item"><span class="item_i">比赛监督</span><span id="bisai">xxxx</span></p>
 		</div>
 		<div class="zhenrong">
 			<div class="align_bar">阵容</div>
@@ -192,13 +476,11 @@
 		                <span class="spanimg" id="hostTeam_socks"><img src="http://s.files.c-f.com/socks.png" /></span>
 		            </div>
 		        </li>
-		        <li>
-		            <ul class="num-name">
-		                <li class="name_a">号码</li>
-		                <li class="name_b">姓名</li>
-		            </ul>
+		        <li id="host_first_bar">
+		            <div class="name_a">号码</div>
+		            <div class="name_b">姓名</div>
 		        </li>
-		        <li class="list_2">
+		        <!-- <li class="list_2">
 		            <div class="name_a">5</div>
 		            <div class="name_b">XXX(队长)</div>
 		        </li>
@@ -213,8 +495,8 @@
 		        <li class="list_1">
 		            <div class="name_a">13</div>
 		            <div class="name_b">XXX(守门员)</div>
-		        </li>
-		        <li class="space_bar">替补</li>
+		        </li> -->
+		        <li class="space_bar" id="host_space_bar">替补</li>
 		        <!-- <li class="list_1">
 		            <div class="name_a">6</div>
 		            <div class="name_b">XXX</div>
@@ -259,13 +541,11 @@
 		                <span class="spanimg" id="awayTeam_socks"><img src="http://s.files.c-f.com/socks.png" /></span>
 		            </div>
 		        </li>
-		        <li>
-		            <ul class="num-name">
-		                <li class="name_a">号码</li>
-		                <li class="name_b">姓名</li>
-		            </ul>
+		        <li id="away_first_bar">
+		            <div class="name_a">号码</div>
+		            <div class="name_b">姓名</div>
 		        </li>
-		        <li class="list_2">
+		        <!-- <li class="list_2">
 		            <div class="name_a">5</div>
 		            <div class="name_b">XXX(队长)</div>
 		        </li>
@@ -280,8 +560,8 @@
 		        <li class="list_1">
 		            <div class="name_a">13</div>
 		            <div class="name_b">XXX(守门员)</div>
-		        </li>
-		        <li class="space_bar">替补</li>
+		        </li> -->
+		        <li class="space_bar" id="away_space_bar">替补</li>
 		        <!-- <li class="list_1">
 		            <div class="name_a">6</div>
 		            <div class="name_b">XXX</div>
@@ -300,45 +580,17 @@
 	
 	
 	<script type="text/javascript">
-        (function(doc, win) {
-            var docEl = doc.documentElement,
-                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
-                recalc = function() {
-                    var clientWidth = docEl.clientWidth;
-                    if (!clientWidth) return;
-                    docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
-                };
-        
-            if (!doc.addEventListener) return;
-            win.addEventListener(resizeEvt, recalc, false);
-            doc.addEventListener('DOMContentLoaded', recalc, false);
-        })(document, window);
 
         $(function(){
-        	getShipin();  //banner
+        	getShipin();  //获取视频
         	showItem("tab_wenzi");   //点击切换tab
         	showItem("tab_duiyuan");
         	showItem("tab_shuju");
 
         	getDuiyuan();  //队员名单
+
         })
-        function getShipin(){
-        	$.ajax({
-        		url: "http://api.c-f.com/football/games/competitions/5/matches/1/zhibo?key=visitor",
-        		type: "GET",
-        		dataType: "json",
-        		data: {},
-        	})
-        	.done(function() {
-        		console.log("success");
-        	})
-        	.fail(function() {
-        		console.log("error");
-        	})
-        	.always(function() {
-        		console.log("complete");
-        	});
-        }
+        //tab展示
         function showItem(a){
         	$("#"+a).on('click',function() {
         		$(this).addClass('active').siblings().removeClass('active');
@@ -346,7 +598,808 @@
         		$("."+a).show();
         	});
         }
-        var datahhh={
+        
+        function getUrlVars() {
+			var vars = {};
+			var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,    
+			function(m,key,value) {
+			  vars[key] = value;
+		      //console.log(vars);
+			});
+			return vars;
+		}
+
+		//?competitionId=5&matchId=1
+		var competitions = getUrlVars()["competitionId"];
+		var matches = getUrlVars()["matchId"];
+		//var contestId;
+        
+        //获取视频
+		function getShipin(){
+        	$.ajax({
+        		url: "http://api.c-f.com/football/games/competitions/"+competitions+"/matches/"+matches+"/zhibo?key=visitor",
+        		type: "GET",
+        		dataType: "json",
+        		data: {},
+        	})
+        	.done(function(data) {
+        		//是否显示视频可点击框框
+                if (data.videoUrl) {
+                	$(".banner_shipin").css('display', 'block');
+                } else {
+                	$(".banner_shipin").html(' ');
+                	$(".banner_shipin").css('border', '0px');
+                }
+                //文字直播暂无、已结束、正在进行展示数据
+                if (data.status == "1") {
+                	var content = "<li>"+
+							      "<p class='time'>"+"暂无直播"+"</p>"+
+							  "</li>";
+			        $(".room").append(content);
+                } else if (data.status == "3") {
+                	var content = "<li>"+
+							      "<p class='time'>"+"已结束"+"</p>"+
+							  "</li>";
+			        $(".room").append(content);
+                } else {
+                	requireWenzi(data.contestId);  //直播文字
+                    setInterval(requireWenzi, 1000 * 60);  //实时更新
+                }
+                //请求数据tab的数据
+                //getShuju(data.contestId); 
+                //getZhenrong(); 
+        	})
+        	.fail(function() {
+        		//console.log("error");
+        	})
+        	.always(function() {
+        		//console.log("complete");
+        	});
+        }
+
+//文字直播数据
+/*var wenzidata = {
+  "code": 200,
+  "data": {
+    "endId": 70,
+    "live_words": [
+      {
+        "phrase_id": 70,
+        "text_content": "全场比赛结束 最终比分：1 - 2.",
+        "time": 90,
+        "injury_time": 0,
+        "type": 23
+      },
+      {
+        "phrase_id": 69,
+        "text_content": "Northeast United FC 的球员 希拉斯 射门。不过可惜打中了门柱，没进。",
+        "time": 90,
+        "injury_time": 0,
+        "type": 88
+      },
+      {
+        "phrase_id": 68,
+        "text_content": "射门没命中目标． Chennaiyin FC 球员 Bruno Pelissari 射门但没命中门框，没法造成入球．　",
+        "time": 90,
+        "injury_time": 0,
+        "type": 91
+      },
+      {
+        "phrase_id": 67,
+        "text_content": "Chennaiyin FC 队的球员 Abhishek Das 在球场 左路开出了角球。",
+        "time": 90,
+        "injury_time": 0,
+        "type": 85
+      },
+      {
+        "phrase_id": 66,
+        "text_content": "经过治疗 TP Rehenesh 重新回到了正在 金奈 Jawaharlal Nehru Stadium 进行的比赛中.",
+        "time": 90,
+        "injury_time": 0,
+        "type": 98
+      },
+      {
+        "phrase_id": 65,
+        "text_content": "在 金奈 市 Jawaharlal Nehru Stadium 球场的比赛已重新开始。",
+        "time": 90,
+        "injury_time": 0,
+        "type": 79
+      },
+      {
+        "phrase_id": 64,
+        "text_content": "正在 金奈 进行的球赛, 下半场 将会加时 4 分钟.",
+        "time": 90,
+        "injury_time": 0,
+        "type": 105
+      },
+      {
+        "phrase_id": 63,
+        "text_content": "Northeast United FC 的队员 TP Rehenesh 出现了受伤的情况，比赛临时中断。",
+        "time": 90,
+        "injury_time": 0,
+        "type": 96
+      },
+      {
+        "phrase_id": 62,
+        "text_content": "在 金奈 在 Jawaharlal Nehru Stadium 进行的球赛中,主裁 Banerjee Pranjal 给出了本场比赛中的第一张黄牌,由 Chennaiyin FC 球员 Abhishek Das 获得.",
+        "time": 90,
+        "injury_time": 0,
+        "type": 7
+      },
+      {
+        "phrase_id": 61,
+        "text_content": "Northeast United FC 的球员 布鲁诺 赫雷罗 射门。可惜打中了门柱，没进。",
+        "time": 89,
+        "injury_time": 0,
+        "type": 89
+      },
+      {
+        "phrase_id": 60,
+        "text_content": "Chennaiyin FC 的球员 门多萨 约翰 射门，不过球偏出了门框范围内。",
+        "time": 88,
+        "injury_time": 0,
+        "type": 91
+      },
+      {
+        "phrase_id": 59,
+        "text_content": "Chennaiyin FC 队主教练 Marco Materazzi 作出了本场比赛中的 第3 次换人,由 菲克鲁 特菲拉 代替 Mailson 上场进行比赛.",
+        "time": 84,
+        "injury_time": 0,
+        "type": 44
+      },
+      {
+        "phrase_id": 58,
+        "text_content": "主裁 Banerjee Pranjal 给了 Chennaiyin FC 球员 Khangebam Thoi Singh 本场比赛的第一张黄牌.",
+        "time": 74,
+        "injury_time": 0,
+        "type": 45
+      },
+      {
+        "phrase_id": 57,
+        "text_content": "球员替换：　Chennaiyin FC换入 Abhishek Das 换出 Khangebam Thoi Singh ；这个是 Chennaiyin FC 主教练： Marco Materazzi 今仗的第2个替换调动，",
+        "time": 79,
+        "injury_time": 0,
+        "type": 44
+      },
+      {
+        "phrase_id": 56,
+        "text_content": "Chennaiyin FC 前场得到一次射门机会. Bruno Pelissari ，但是被 Northeast United FC 破坏.",
+        "time": 78,
+        "injury_time": 0,
+        "type": 115
+      },
+      {
+        "phrase_id": 55,
+        "text_content": "场边举起了换人牌， 客队 的 塞德里克 亨巴特 替换上场。可能是主教练 Cesar Farias 看到 迪奥曼西 卡马拉 似乎受伤了。这是 第3 次换人安排。",
+        "time": 77,
+        "injury_time": 0,
+        "type": 73
+      },
+      {
+        "phrase_id": 54,
+        "text_content": "在主裁判示意下，之前受伤的 Northeast United FC 的球员 迪奥曼西 卡马拉 重新返回了球场。",
+        "time": 75,
+        "injury_time": 0,
+        "type": 98
+      },
+      {
+        "phrase_id": 53,
+        "text_content": "主队 Chennaiyin FC 第三次换人,由 Bruno Pelissari 替代 埃拉诺 上场进行比赛.这是在 金奈 的 Jawaharlal Nehru Stadium 进行的比赛.",
+        "time": 75,
+        "injury_time": 0,
+        "type": 6
+      },
+      {
+        "phrase_id": 52,
+        "text_content": "比赛已恢复进行．比场城市：金奈，",
+        "time": 75,
+        "injury_time": 0,
+        "type": 78
+      },
+      {
+        "phrase_id": 51,
+        "text_content": "Northeast United FC 队的球员 迪奥曼西 卡马拉 受伤了，比赛临时中断。",
+        "time": 73,
+        "injury_time": 0,
+        "type": 96
+      },
+      {
+        "phrase_id": 50,
+        "text_content": "迪奥曼西 卡马拉 好一次漂亮的助攻，进球了!",
+        "time": 72,
+        "injury_time": 0,
+        "type": 139
+      },
+      {
+        "phrase_id": 49,
+        "text_content": "进了！ Northeast United FC 的 希拉斯 射门入网,成功使 客队 以比分 2 - 1 领先。比赛场地是在 金奈 的 Jawaharlal Nehru Stadium 体育场。",
+        "time": 72,
+        "injury_time": 0,
+        "type": 36
+      },
+      {
+        "phrase_id": 48,
+        "text_content": "场上发生人员调整。 Northeast United FC的希拉斯替补登场，换下了西芒.",
+        "time": 71,
+        "injury_time": 0,
+        "type": 6
+      },
+      {
+        "phrase_id": 47,
+        "text_content": "Northeast United FC 队的球员 西芒 在球场 右路开出了角球。",
+        "time": 70,
+        "injury_time": 0,
+        "type": 85
+      },
+      {
+        "phrase_id": 46,
+        "text_content": "Chennaiyin FC 全场压上, Raphael Augusto 的射门,被 Northeast United FC 有效阻挡.",
+        "time": 69,
+        "injury_time": 0,
+        "type": 115
+      },
+      {
+        "phrase_id": 45,
+        "text_content": "主裁判 Banerjee Pranjal 给了 Chennaiyin FC 队一个球场 左路 的角球。由 埃拉诺 主罚。",
+        "time": 68,
+        "injury_time": 0,
+        "type": 85
+      },
+      {
+        "phrase_id": 44,
+        "text_content": "Raphael Augusto 的进攻被防守队员破坏了.",
+        "time": 68,
+        "injury_time": 0,
+        "type": 116
+      },
+      {
+        "phrase_id": 43,
+        "text_content": "Northeast United FC 球员 Nicolas Velez 打门，可惜球飞出了球门范围。",
+        "time": 67,
+        "injury_time": 0,
+        "type": 90
+      },
+      {
+        "phrase_id": 42,
+        "text_content": "角球被开出． Chennaiyin FC 球员 梅拉尤丁 瓦度 在前场底线的右路开出了角球．",
+        "time": 65,
+        "injury_time": 0,
+        "type": 85
+      },
+      {
+        "phrase_id": 41,
+        "text_content": "Chennaiyin FC 队的球员 Raphael Augusto 射门。可惜打中了门框，没进。",
+        "time": 65,
+        "injury_time": 0,
+        "type": 89
+      },
+      {
+        "phrase_id": 40,
+        "text_content": "角球被开出． Chennaiyin FC 球员 埃拉诺 在前场底线的右路开出了角球．",
+        "time": 62,
+        "injury_time": 0,
+        "type": 85
+      },
+      {
+        "phrase_id": 39,
+        "text_content": "射门中目标． Chennaiyin FC 球员 埃拉诺 射门命中门框，但没有造成入球．",
+        "time": 62,
+        "injury_time": 0,
+        "type": 89
+      },
+      {
+        "phrase_id": 38,
+        "text_content": "Northeast United FC 队主教练 Cesar Farias 作出了本场比赛中的 第1 次换人,由 Nicolas Velez 代替 Francis Dadzie 上场进行比赛.",
+        "time": 59,
+        "injury_time": 0,
+        "type": 6
+      },
+      {
+        "phrase_id": 37,
+        "text_content": "射门没命中目标． Chennaiyin FC 球员 Balwant Singh 射门但没命中门框，没法造成入球．",
+        "time": 59,
+        "injury_time": 0,
+        "type": 91
+      },
+      {
+        "phrase_id": 36,
+        "text_content": "主裁判 Banerjee Pranjal 判了 Chennaiyin FC 球员 门多萨 约翰 越位。",
+        "time": 57,
+        "injury_time": 0,
+        "type": 92
+      },
+      {
+        "phrase_id": 35,
+        "text_content": "Chennaiyin FC 队的球员 埃拉诺 在球场 左路开出了角球。",
+        "time": 55,
+        "injury_time": 0,
+        "type": 85
+      },
+      {
+        "phrase_id": 34,
+        "text_content": "Northeast United FC 队的 Francis Dadzie 头球攻门，偏出了球门。",
+        "time": 52,
+        "injury_time": 0,
+        "type": 127
+      },
+      {
+        "phrase_id": 33,
+        "text_content": "Northeast United FC 队的球员 Seityasen Singh 射门。可惜打中了门框，没进。",
+        "time": 51,
+        "injury_time": 0,
+        "type": 88
+      },
+      {
+        "phrase_id": 32,
+        "text_content": "Chennaiyin FC 的球员 门多萨 约翰 射门，不过球偏出了门框范围内。",
+        "time": 50,
+        "injury_time": 0,
+        "type": 90
+      }
+    ]
+  }
+}*/
+        //获取文字直播
+        var endId = 0;
+        function requireWenzi(a) {
+        	$.ajax({
+        		//?contest_id=27364&end_id="+endId+"
+        		url: "http://192.168.2.160:8080/cbs/fb/contest/livewords?contest_id="+a+"&end_id="+endId+"",
+        		type: "GET",
+        		dataType: "json",
+        		data: {},
+        	})
+        	.done(function(data) {
+        		showWords(data);  //文字列表
+        		//无新数据时再请求上次的endId
+        		endIdS = endId;
+        		if (data.data.live_words) {
+        			endId = data.data.endId;
+        		} else {
+        			endId = endIdS;
+        		}
+        		//console.log(endId);
+        	})
+        	.fail(function() {
+        		//console.log("error");
+        	})
+        	.always(function() {
+        		//console.log("complete");
+        	});
+        }
+        //展示文字直播列表
+        function showWords(data){
+        	$.each(data.data.live_words, function(index, val) {
+        		var content = "<li>"+
+							      "<p class='time'>"+val.time+"</p>"+
+							      "<p class='content'>"+val.text_content+"</p>"+
+							  "</li>";
+			    $(".room").append(content);
+        	});
+        }
+        
+        //转时间戳
+        function getLocalTime(nS) {     
+		   //return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
+		    date=new Date(nS);
+		    //获取当前时间的小时
+			var hours = date.getHours();//10
+			//分钟
+			var min = date.getMinutes();//36
+			//秒
+			var sec = date.getSeconds();//25
+			//年
+			var year = date.getFullYear();//2015
+			//月    月份的范围是从0~11,所以获得的月份要加1才是当前月
+			var mon = date.getMonth()+1;//9
+			//日
+			var day = date.getDate();//21
+             //console.log(hours);
+             //console.log(min);
+             //console.log(sec);
+             //console.log(year);
+             //console.log(mon);
+             //console.log(day);
+			return year+"年"+mon+"月"+day+"日"+hours+":"+min;
+		}  
+
+		//获取数据tab数据 
+		/*function getShuju(b){
+			$.ajax({
+				url: "http://192.168.2.160:8080/cbs/fb/contest/statisticsandevents?contest_id=27364",
+				type: "GET",
+				dataType: "json",
+				data: {},
+			})
+			.done(function(data) {
+				console.log("success");
+				
+			})
+			.fail(function() {
+				console.log("error");
+			})
+			.always(function() {
+				console.log("complete");
+			});
+		}
+		function getZhenrong(){
+			$.ajax({
+				url: "http://192.168.2.160:8080/cbs/fb/contest/fixed?contest_id=27364",
+				type: "GET",
+				dataType: "json",
+				data: {},
+			})
+			.done(function() {
+				console.log("success");
+			})
+			.fail(function() {
+				console.log("error");
+			})
+			.always(function() {
+				console.log("complete");
+			});
+			
+		}*/
+// 数据 数据模拟
+var shujuSaikuang = {
+    "code": 200, 
+    "data": {
+        "h_statistics": {
+            "ball_possession": 45, 
+            "shots_on_goal": 5, 
+            "shots_off_goal": 9, 
+            "free_kicks": 20, 
+            "corner_kicks": 4, 
+            "offsides": 2, 
+            "throw_ins": 20, 
+            "goalkeeper_saves": 3, 
+            "goal_kicks": 8, 
+            "fouls": 16
+        }, 
+        "a_statistics": {
+            "ball_possession": 55, 
+            "shots_on_goal": 5, 
+            "shots_off_goal": 6, 
+            "free_kicks": 18, 
+            "corner_kicks": 3, 
+            "offsides": 6, 
+            "throw_ins": 21, 
+            "goalkeeper_saves": 4, 
+            "goal_kicks": 17, 
+            "fouls": 14
+        }, 
+        "events": [
+            {
+                "target_id": 219546417, 
+                "time": 15, 
+                "team": 2, 
+                "type": 2, 
+                "player": {
+                    "name": "莱万多夫斯基", 
+                    "substitute": false
+                }, 
+                "home_scores": 0, 
+                "away_scores": 1
+            }, 
+            {
+                "target_id": 219554611, 
+                "time": 32, 
+                "team": 2, 
+                "type": 1, 
+                "player": {
+                    "name": "莱万多夫斯基", 
+                    "substitute": false
+                }, 
+                "assist1": {
+                    "name": "阿隆索", 
+                    "substitute": false
+                }, 
+                "home_scores": 0, 
+                "away_scores": 2
+            }, 
+            {
+                "target_id": 219560635, 
+                "time": 42, 
+                "team": 1, 
+                "type": 2, 
+                "player": {
+                    "name": "莫里茨·哈特曼", 
+                    "substitute": false
+                }, 
+                "home_scores": 1, 
+                "away_scores": 2
+            }, 
+            {
+                "target_id": 219570455, 
+                "time": 46, 
+                "team": 2, 
+                "type": 8, 
+                "player": {
+                    "name": "阿隆索", 
+                    "substitute": false
+                }
+            }, 
+            {
+                "target_id": 219570455, 
+                "time": 46, 
+                "team": 2, 
+                "type": 9, 
+                "player": {
+                    "name": "马德希·贝纳蒂亚", 
+                    "substitute": false
+                }
+            }, 
+            {
+                "target_id": 219571239, 
+                "time": 46, 
+                "team": 2, 
+                "type": 5, 
+                "player": {
+                    "name": "马德希·贝纳蒂亚", 
+                    "substitute": false
+                }
+            }, 
+            {
+                "target_id": 219577445, 
+                "time": 57, 
+                "team": 2, 
+                "type": 8, 
+                "player": {
+                    "name": "里贝里", 
+                    "substitute": false
+                }
+            }, 
+            {
+                "target_id": 219577445, 
+                "time": 57, 
+                "team": 2, 
+                "type": 9, 
+                "player": {
+                    "name": "拉菲尼亚", 
+                    "substitute": false
+                }
+            }, 
+            {
+                "target_id": 219580755, 
+                "time": 63, 
+                "team": 1, 
+                "type": 8, 
+                "player": {
+                    "name": "阿尔莫戈·科亨", 
+                    "substitute": false
+                }
+            }, 
+            {
+                "target_id": 219580755, 
+                "time": 63, 
+                "team": 1, 
+                "type": 9, 
+                "player": {
+                    "name": "阿尔弗雷多·莫拉莱斯", 
+                    "substitute": false
+                }
+            }, 
+            {
+                "target_id": 219585547, 
+                "time": 75, 
+                "team": 2, 
+                "type": 5, 
+                "player": {
+                    "name": "穆勒", 
+                    "substitute": false
+                }
+            }, 
+            {
+                "target_id": 219586309, 
+                "time": 77, 
+                "team": 1, 
+                "type": 8, 
+                "player": {
+                    "name": "莫里茨·哈特曼", 
+                    "substitute": false
+                }
+            }, 
+            {
+                "target_id": 219586309, 
+                "time": 77, 
+                "team": 1, 
+                "type": 9, 
+                "player": {
+                    "name": "卢卡斯·辛特希尔", 
+                    "substitute": false
+                }
+            }, 
+            {
+                "target_id": 219587763, 
+                "time": 80, 
+                "team": 2, 
+                "type": 5, 
+                "player": {
+                    "name": "莱万多夫斯基", 
+                    "substitute": false
+                }
+            }, 
+            {
+                "target_id": 219588613, 
+                "time": 82, 
+                "team": 1, 
+                "type": 8, 
+                "player": {
+                    "name": "Lezcano, Dario", 
+                    "substitute": false
+                }
+            }, 
+            {
+                "target_id": 219588613, 
+                "time": 82, 
+                "team": 1, 
+                "type": 9, 
+                "player": {
+                    "name": "斯特凡·莱克斯", 
+                    "substitute": false
+                }
+            }, 
+            {
+                "target_id": 219589023, 
+                "time": 83, 
+                "team": 1, 
+                "type": 5, 
+                "player": {
+                    "name": "斯特凡·莱克斯", 
+                    "substitute": false
+                }
+            }, 
+            {
+                "target_id": 219591469, 
+                "time": 89, 
+                "team": 1, 
+                "type": 5, 
+                "player": {
+                    "name": "马修·莱基", 
+                    "substitute": false
+                }
+            }, 
+            {
+                "target_id": 219591621, 
+                "time": 89, 
+                "team": 2, 
+                "type": 8, 
+                "player": {
+                    "name": "蒂亚戈", 
+                    "substitute": false
+                }
+            }, 
+            {
+                "target_id": 219591621, 
+                "time": 89, 
+                "team": 2, 
+                "type": 9, 
+                "player": {
+                    "name": "罗德", 
+                    "substitute": false
+                }
+            }
+        ]
+    }
+}
+    function showSaikuang(shujuSaikuang){
+    	var events = shujuSaikuang.data.events;
+    	$.each(events, function(index, val) {
+    		console.log(val.team);
+    		var bifen;
+    		if (val.home_scores) {
+    			bifen = val.home_scores +":"+val.away_scores;
+    		} else {
+    			bifen = " ";
+    		}
+    		 /* iterate through array or object */
+    		 if (val.team == "1") {
+    		 	var tr = "<tr class='host'>"+
+	    	            "<td width='30%' class='name'>"+val.player.name+"</td>"+
+	    	            "<td width='15%' class='icon icon"+val.type+"'>"+bifen+"</td>"+
+	    	            "<td width='10%' >"+val.time+"</td>"+
+	    	            "<td width='45%' colspan='2'></td>"+
+	    	        "</tr>";
+    		 } else {
+    		 	var tr = "<tr class='away'>"+
+	    	            "<td width='45%' colspan='2'></td>"+
+	    	            "<td width='10%'>"+val.time+"</td>"+
+	    	            "<td width='15%' class='icon icon"+val.type+"'>"+bifen+"</td>"+
+	    	            "<td width='30%' class='name' >"+val.player.name+"</td>"+
+	    	        "</tr>";
+    		 }
+    		 $(".saikuang").append(tr);
+    	});	 
+    };
+    showSaikuang(shujuSaikuang);
+
+    function showJishutongji(shujuSaikuang){
+        var arr = [] //技术统计数组
+    	var as = shujuSaikuang.data.a_statistics;
+    	var hs = shujuSaikuang.data.h_statistics;
+        for (var a in hs) {
+            var object = {};
+            var name = "";
+            var key = 0;
+            if (a == "ball_possession") {
+                name = "控球率";
+                key = 0;
+            }
+            if (a == "shots_on_goal") {
+                name = "射正";
+                key = 1;
+            }
+            if (a == "shots_off_goal") {
+                name = "射偏";
+                key = 2;
+            }
+            if (a == "free_kicks") {
+                name = "任意球";
+                key = 3;
+            }
+            if (a == "corner_kicks") {
+                name = "角球";
+                key = 4;
+            }
+            if (a == "throw_ins") {
+                name = "角球";
+                key = 5;
+            }
+            if (a == "corner_kicks") {
+                name = "掷界外球";
+                key = 6;
+            }
+            if (a == "goalkeeper_saves") {
+                name = "门将扑救";
+                key = 7;
+            }
+            if (a == "goal_kicks") {
+                name = "球门球";
+                key = 8;
+            }
+            if (a == "offsides") {
+                name = "越位";
+                key = 9;
+            }
+            if (a == "fouls") {
+                name = "犯规";
+                key = 10;
+            }
+            object.name = name;
+            object.key = key;
+            object.hvalue = hs[a];
+            for (var b in as) {
+                if (b == a) {
+                    object.avalue = as[b];
+                }
+            }
+            arr.push(object);
+            console.log(arr);
+        }
+        $.each(arr, function(index, val) {
+        	var tr = "<tr class='tr'>"+
+	    	            "<td width='10%'><span>"+val.hvalue+"</span></td>"+
+	    	            "<td width='80%'>"+
+	    	                "<p>"+val.name+"</p>"+
+	    	                "<div class='line'>"+
+	    	                    "<div class='left'>"+
+	    	                        "<span style='width: "+val.hvalue+"%;'></span>"+
+	    	                    "</div>"+
+	    	                    "<div class='right'>"+
+	    	                        "<span style='width: "+val.avalue+"%;'></span>"+
+	    	                    "</div>"+
+	    	                "</div>"+
+	    	            "</td>"+
+	    	            "<td width='10%'><span>"+val.avalue+"</span></td>"+
+    	            "</tr>";
+    	    $(".sta").append(tr);
+        });
+    }
+    showJishutongji(shujuSaikuang);
+		
+
+// 队员 数据模拟
+/*var datahhh={
         	"substitutionPlayers" : [ 
         	{
 		      "birthday" : "2000-01-23T04:56:07.000+00:00",
@@ -365,7 +1418,7 @@
 		      "weight" : "aeiou",
 		      "id" : 123456789,
 		      "avatar" : "aeiou",
-		      "position" : "aeiou",
+		      "position" : "789",
 		      "jeserysNum" : 123,
 		      "first" : 123,
 		      "height" : "aeiou"
@@ -387,16 +1440,17 @@
 		      "weight" : "aeiou",
 		      "id" : 123456789,
 		      "avatar" : "aeiou",
-		      "position" : "aeiou",
+		      "position" : "队长",
 		      "jeserysNum" : 456,
 		      "first" : 123,
 		      "height" : "aeiou"
 		    }
 		    ],
-        }
+        }*/
+        //获取队员名单数据
         function getDuiyuan(){
         	$.ajax({
-        		url: "http://api.c-f.com/football/games/competitions/5/matches/1?key=visitor",
+        		url: "http://api.c-f.com/football/games/competitions/"+competitions+"/matches/"+matches+"?key=visitor",
         		type: "GET",
         		dataType: "json",
         		data: {},
@@ -404,47 +1458,270 @@
         	.done(function(data) {
         		function ifNnll(a){
 		        	if (a) {
-		        		return a;
+		        		if (typeof a=='string') {
+        				    return a;
+        			    } else {
+        				    return a.name;
+        			    }	
 		        	} else {
-		        		return "未产生";
+		        		return " ";
 		        	}
 		        }
-		        $("#hostTeam_name_span").text(ifNnll(data.hostTeam.teamInfo.name));
-		        $("#awayTeam_name_span").text(ifNnll(data.awayTeam.teamInfo.name));
-        		$("#caipanyuan").text(ifNnll(data.chiefReferee.name));
-        		$("#diyi").text(ifNnll(data.sideReferees[0].name));
-        		$("#dier").text(ifNnll(data.sideReferees[1].name));
-        		$("#disi").text(ifNnll(data.fourthReferee.name));
+		        $("#didian").text(data.court.name);
+		        $("#shijian").text(getLocalTime(data.competitionInfo.startDate));
+		        $(".banner>img").attr("src","http://s.files.c-f.com/"+data.court.images);
+
+		        $("#hostTeam_name_span").text(ifNnll(data.hostTeam.teamInfo));
+		        $("#awayTeam_name_span").text(ifNnll(data.awayTeam.teamInfo));
+        		$("#caipanyuan").text(ifNnll(data.chiefReferee));
+        		$("#diyi").text(ifNnll(data.sideReferees[0]));
+        		$("#dier").text(ifNnll(data.sideReferees[1]));
+        		$("#disi").text(ifNnll(data.fourthReferee));
         		$("#caipan").text(ifNnll(data.cpjd));
         		$("#bisai").text(ifNnll(data.bsjd));
-        		console.log(ifNnll(data.chiefReferee.name));
 
         		//主队
-        		$("#hostTeam_name").text(ifNnll(data.hostTeam.teamInfo.name));
+        		//国旗
+        		$(".flag_l").attr("src","http://s.files.c-f.com/"+data.hostTeam.jersey.team.flag);
+        		//国家名
+        	    $(".flag_l").next("p").text(ifNnll(data.hostTeam.teamInfo));
+
+        		$("#hostTeam_name").text(ifNnll(data.hostTeam.teamInfo));
         		$("#hostTeam_teamLeader").text(ifNnll(data.hostTeam.teamLeader));
-        		$("#hostTeam_chiefCoach").text(ifNnll(data.hostTeam.chiefCoach.name));
+        		$("#hostTeam_chiefCoach").text(ifNnll(data.hostTeam.chiefCoach));
         		$("#hostTeam_jacket").css('background-color', data.hostTeam.jersey.jacket);
         		$("#hostTeam_shorts").css('background-color', data.hostTeam.jersey.shorts);
         		$("#hostTeam_socks").css('background-color', data.hostTeam.jersey.socks);
 
         		//客队
-        		$("#awayTeam_name").text(ifNnll(data.awayTeam.teamInfo.name));
-        		$("#awayTeam_teamLeader").text(ifNnll(data.awayTeam.teamLeader.name));
-        		$("#awayTeam_chiefCoach").text(ifNnll(data.awayTeam.chiefCoach.name));
+        		$(".flag_r").attr("src","http://s.files.c-f.com/"+data.awayTeam.jersey.team.flag);
+        		$(".flag_r").next("p").text(ifNnll(data.awayTeam.teamInfo));
+
+        		$("#awayTeam_name").text(ifNnll(data.awayTeam.teamInfo));
+        		$("#awayTeam_teamLeader").text(ifNnll(data.awayTeam.teamLeader));
+        		$("#awayTeam_chiefCoach").text(ifNnll(data.awayTeam.chiefCoach));
         		$("#awayTeam_jacket").css('background-color', data.awayTeam.jersey.jacket);
         		$("#awayTeam_shorts").css('background-color', data.awayTeam.jersey.shorts);
         		$("#awayTeam_socks").css('background-color', data.awayTeam.jersey.socks);
+        		//首发
+        		if (data.awayTeam.firstPlayers.length > 0) {
+        			$.each(data.awayTeam.firstPlayers, function(index, val) {
+	        			//console.log(index);
+	        			//console.log(val.name);
+	        			var position = val.position;
+	        			//console.log(position);
+	        			if (position=="队长"||position=="守门员") {
+	        				var li="<li class=''>"+
+						            "<div class='name_a'>"+val.jeserysNum+"</div>"+
+						            "<div class='name_b'>"+val.name+"("+position+")"+"</div>"+
+						        "</li>";
+	        			} else {
+	        				var li="<li class=''>"+
+						            "<div class='name_a'>"+val.jeserysNum+"</div>"+
+						            "<div class='name_b'>"+val.name+"</div>"+
+						        "</li>";
+	        			}
+						$("#away_first_bar").after(li);
+	        		});
+        		} else {
+        			var li="<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>";
+					$("#away_first_bar").after(li);
+        		}
+        		if (data.hostTeam.firstPlayers.length > 0) {
+        			$.each(data.hostTeam.firstPlayers, function(index, val) {
+	        			//console.log(index);
+	        			//console.log(val.name);
+	        			var position = val.position;
+	        			//console.log(position);
+	        			if (position=="队长"||position=="守门员") {
+	        				var li="<li class=''>"+
+						            "<div class='name_a'>"+val.jeserysNum+"</div>"+
+						            "<div class='name_b'>"+val.name+"("+position+")"+"</div>"+
+						        "</li>";
+						    
+	        			} else {
+	        				var li="<li class=''>"+
+						            "<div class='name_a'>"+val.jeserysNum+"</div>"+
+						            "<div class='name_b'>"+val.name+"</div>"+
+						        "</li>";
+	        			}
+						$("#host_first_bar").after(li);
+	        		});
+        		} else {
+        			var li="<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>";
+					$("#host_first_bar").after(li);
+        		}
 
         		// 替补
-        		$.each(datahhh.substitutionPlayers, function(index, val) {
-        			console.log(index);
-        			console.log(val.name);
+        		if (data.hostTeam.substitutionPlayers.length > 0) {
+        			$.each(data.hostTeam.substitutionPlayers, function(index, val) {
+	        			//console.log(index);
+	        			//console.log(val.name);
+	        				var li="<li class=''>"+
+						            "<div class='name_a'>"+val.jeserysNum+"</div>"+
+						            "<div class='name_b'>"+val.name+"</div>"+
+						        "</li>";
+						    
+						$("#host_space_bar").after(li);
+	        		});
+        		} else {
         			var li="<li class=''>"+
-					            "<div class='name_a'>"+val.jeserysNum+"</div>"+
-					            "<div class='name_b'>"+val.name+"</div>"+
-					        "</li>"
-					$(".space_bar").after(li);
-        		});
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>";
+					$("#host_space_bar").after(li);
+        		}
+        		if (data.awayTeam.substitutionPlayers.length > 0) {
+        			$.each(data.awayTeam.substitutionPlayers, function(index, val) {
+	        			//console.log(index);
+	        			//console.log(val.name);
+	        			var li="<li class=''>"+
+						            "<div class='name_a'>"+val.jeserysNum+"</div>"+
+						            "<div class='name_b'>"+val.name+"</div>"+
+						        "</li>"
+						$("#away_space_bar").after(li);
+	        		});
+        		} else {
+        			var li="<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>"+
+					        "<li class=''>"+
+					            "<div class='name_a'></div>"+
+					            "<div class='name_b'></div>"+
+					        "</li>";
+					$("#away_space_bar").after(li);
+        		}
         	})
         	.fail(function() {
         		console.log("error");
